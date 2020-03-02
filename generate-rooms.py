@@ -26,19 +26,30 @@ rules = {
 
     'setFeatureType': ['#feature#', '#featureAdjective# #feature#'],
     'description': [
-        'You see #setFeatureType.a#.',
-        'You bend over, and spot several #setFeatureType.s#.',
-        'You hear a sound behind you and turn around. At your feet is #setFeatureType.a#.'
+        'You see ~#setFeatureType.a#~.', #Note: ~tildes~, here, make it possible to scrape features (items) from the room string.
+        'You bend over, and spot several ~#setFeatureType.s#~.',
+        'You hear a sound behind you and turn around. At your feet is ~#setFeatureType.a#~.'
     ],
 
     'origin': '#[#setRoomName#]title#: #description#'
-}
+    }
 
 grammar = tracery.Grammar(rules)
 grammar.add_modifiers(base_english)
 
+# def scrapeItems(str):
+#     for i in range(len(str)):
+#         item = ''
+        # scraping = 
+
 rooms = []
 for i in range(50):
-    rooms.append(grammar.flatten('#origin#'))
+    roomString = grammar.flatten('#origin#')
+    splitRoomString = roomString.split(": ")
+
+    rooms.append({
+        'title': splitRoomString[0],
+        'description': splitRoomString[1]
+    })
 
 print(rooms)
