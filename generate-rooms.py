@@ -9,7 +9,7 @@ rules = {
         f'[roomName:corridor][feature:{basicRoomFeatures}]', 
         f'[roomName:medbay][feature:{basicRoomFeatures},medkit,empty bed]',
         f'[roomName:armoury][feature:{basicRoomFeatures},phaser,pistol,assault rifle,grenade,odd-looking gun]',
-        f'[roomName:quarters][feature:{basicRoomFeatures},mirror,jewel,family photo,picture of a dog]',
+        f'[roomName:quarters][feature:{basicRoomFeatures},mirror,jewel,family photo]',
         f'[roomName:bridge][feature:{basicRoomFeatures},chair,flight computer]',
         f'[roomName:brig][feature:{basicRoomFeatures},force field,handcuff]',
         f'[roomName:passageway][feature:{basicRoomFeatures},communicator]',
@@ -17,14 +17,18 @@ rules = {
         f'[roomName:mess-hall][feature:{basicRoomFeatures},pot,pan,vegetable,fruit,plate,knife,fork,replicator]',
         f'[roomName:engine-room][feature:{basicRoomFeatures},pipe,reactor,green gelatinous puddle]',
     ],
-    'adjective': ['dark', 'smoky', 'dangerous-looking', 'messy', 'quiet', 'irradiated', 'full', 'empty', 'packed', 'stripped', 'ransacked'],
+    'roomAdjective': ['dark', 'smoky', 'dangerous-looking', 'messy', 'quiet', 'irradiated', 'full', 'empty', 'packed', 'stripped', 'ransacked'],
+    'featureAdjective': ['smoking', 'broken', 'flashing', 'beeping', 'oversized', 'odd-looking', 'unfamiliar', 'sharp', 'hot'],
+
     'adverb': ['suspiciously', 'strangely', 'worryingly', 'puzzlingly', 'suprisingly', 'curiously'],
-    'setTitleType': ['#adjective.capitalize#', '#adverb.capitalize# #adjective.capitalize#'],
+    'setTitleType': ['#roomAdjective.capitalize#', '#adverb.capitalize# #roomAdjective.capitalize#'],
     'title': '#setTitleType# #roomName.capitalize#',
 
+    'setFeatureType': ['#feature#', '#featureAdjective# #feature#'],
     'description': [
-        'You see #feature.a#.',
-        'You bend over, and spot several #feature.s#.'
+        'You see #setFeatureType.a#.',
+        'You bend over, and spot several #setFeatureType.s#.',
+        'You hear a sound behind you and turn around. At your feet is #setFeatureType.a#.'
     ],
 
     'origin': '#[#setRoomName#]title#: #description#'
